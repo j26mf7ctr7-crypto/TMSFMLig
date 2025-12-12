@@ -3,26 +3,26 @@ body {
     font-family: Arial, sans-serif;
 }
 
-    html, body {
-        min-width: 1280px; /* заставляем мобильный браузер показывать ПК-ширину */
-    }
+html, body {
+    min-width: 1280px;
+    width: 1280px;
+    overflow-x: scroll;
+}
 
-
-
-.filters-column, .filters-column, .sidebar-center {
+.filters-column, .filters-column, .sidebar-center, .float-panel, title, .content{
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
-/* Темная тема */
-/* === Переключатель темы iOS — рабочий === */
+
+/* === iOS Переключатель темы === */
 .switch {
     position: fixed;
     top: 7px;
     right: 100px;
     width: 50px;
     height: 26px;
-    background: #d0d0d0;          /* светлая тема */
+    background: #d0d0d0;
     border-radius: 30px;
     padding: 2px;
     display: flex;
@@ -35,23 +35,22 @@ body {
 .switch-circle {
     width: 22px;
     height: 22px;
-    background: #ffffff;          /* светлая — круг белый */
+    background: #ffffff;
     border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0,0,0,0.25);
     transition: transform 0.25s ease, background 0.25s ease;
 }
 
-/* === Активный переключатель (dark mode включён) === */
 .switch.active {
-    background: #444;             /* тёмная тема */
+    background: #444;
 }
 
 .switch.active .switch-circle {
-    transform: translateX(24px);  /* движение круга */
-    background: #f2f2f2;          /* темная — круг светлый */
+    transform: translateX(24px);
+    background: #f2f2f2;
 }
 
-/* === Стиль страницы в тёмном режиме === */
+/* === Dark Mode === */
 .dark-theme {
     background: #1b1b1b;
     color: #fff;
@@ -62,7 +61,7 @@ body {
 }
 
 .dark-theme .sidebar-center-menu {
- background-color: #2a2a2b;
+    background-color: #2a2a2b;
 }
 
 .dark-theme .content {
@@ -73,14 +72,11 @@ body {
     background: #0d4f77;
 }
 
-/* .dark-theme .sidebar-center a {
-    color: white;
-} */
-
 .dark-theme .filters-column {
     color: white;
 }
 
+/* Меню */
 .menu {
     width: 100%;
     margin: 0 auto;
@@ -90,15 +86,16 @@ body {
 .item input {
     display: none;
 }
+
 .item {
     width: 100%;
 }
-/* заголовок пункта */
+
 .title {
     display: flex;
     width: 100%;
     box-sizing: border-box;
-    align-items: centert;
+    align-items: center;
     justify-content: space-between;
     background: #1f5f8b;
     color: white;
@@ -107,22 +104,17 @@ body {
     font-size: 0.8rem;
     border-radius: 7px;
     cursor: pointer;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
-/* стрелка */
 .arrow {
     transition: 0.15s ease;
 }
 
-/* анимация поворота стрелки */
 .item input:checked + .title .arrow {
     transform: rotate(180deg);
 }
 
-/* содержимое */
 .content {
     max-height: 0;
     overflow: hidden;
@@ -133,7 +125,6 @@ body {
     transition: max-height 0.5s ease;
 }
 
-/* когда открыт — плавно выдвигается вниз */
 .item input:checked ~ .content {
     max-height: 700px;
 }
@@ -154,25 +145,19 @@ body {
 .menu-top {
     height: 35px;
     width: 175px;
-    align-items: left;
 }
 
-/* Левый блок */
 .sidebar {
     width: 220px;
     background: #eceef1;
     padding: 10px;
     position: fixed;
-    top: 45px;
+    top: 45px;         /* заменено с % */
     left: 0px;
     height: 100vh;
     overflow-y: auto;
-    box-shadow: 4px 0 35px rgba(0,0,0,0.15); /* Делается эффект тумана */
-    -webkit-user-select: none;
-    -ms-user-select: none;
+    box-shadow: 4px 0 35px rgba(0,0,0,0.15);
     user-select: none;
-
-    /* скрываем скролл */
     scrollbar-width: thin;
 }
 
@@ -195,20 +180,18 @@ body {
     background: transparent;
 }
 
-/* Верхний фиксированный блок */
+/* Верхняя полоска */
 .sidebar-top {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 0px;
+    left: 0px;
+    width: 14350px;     /* вместо 100% */
     height: 20px;
     padding: 12px;
     display: flex;
     align-items: center;
     z-index: 1000;
     border-bottom: rgb(64, 63, 134) solid 1.2px;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
@@ -217,12 +200,12 @@ body {
     height: 100%;
 }
 
-
 .center-menu-bar {
     color: white;
     display: inline;
 }
 
+/* Контент справа */
 .page-content {
     margin-left: 240px;
     margin-top: 65px;
@@ -236,7 +219,6 @@ body {
     color: white;
     border-radius: 7px;
     font-size: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 :target {
@@ -244,22 +226,19 @@ body {
 }
 
 /* ————————————————————————————— */
-/* Контейнер для плавающих панелей */
+/* FLOAT PANELS */
 #floating-panels {
     position: fixed;
     top: 55px;
     left: 240px;
-    width: calc(100% - 270px);
-    height: 50px;        /* меньше — нет белых полос */
+    width: 1040px; /* calc убран → фикс px */
+    height: 50px;
     display: flex;
-    align-items: center; /* панели по центру, без белых линий */
+    align-items: center;
     pointer-events: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
-/* Панель */
 .float-panel {
     position: absolute;
     width: 130px;
@@ -290,12 +269,10 @@ body {
 
 .panel-header span {
     overflow: hidden;
-    
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-/* Кнопка закрытия */
 .close-btn {
     background: none;
     border: none;
@@ -309,16 +286,16 @@ body {
     font-size: 0.1rem;
 }
 
-
-/* ==== БЛОК ГДЕ ИНФОРМАЦИЯ ПО ПОЕЗДКАМ НАХОДИТСЯ  ==== */
+/* ————————————————————————————— */
+/* ГЛАВНЫЙ БЛОК ФИЛЬТРОВ */
 .sidebar-center-menu {
     background: #eceef1;
     border-radius: 7px;
     box-shadow: 4px 0 35px rgba(0,0,0,0.15);
     position: fixed;
-    top: 11%;
-    left: 16.5%;
-    width: 100%;
+    top: 89px;     /* заменено с 11% */
+    left: 244px;    /* заменено с 16.5% */
+    width: 1200px;  /* вместо 100% */
     height: 120px;
     padding: 12px;
     display: block;
@@ -326,51 +303,43 @@ body {
     user-select: none;
 }
 
-.sidebar-center a:hover {
-    background: #e5e5e5;
-}
-
-/* Работа с текстом Выгрущить Экспорт и т.п */
-
-
+/* Верхнее меню (кнопки) */
 .sidebar-center {
     font-size: 14px;
-    /* border: 0.5px solid #1f5f8b;  */ /* Добавляет полосы  */
-    border-radius: 7px;          
+    border-radius: 7px;
     cursor: pointer;
     display: flex;
     gap: 10px;
-
 }
 
-/* Работа с текстом Выгрущить Экспорт и т.п */
-
-/* ==== iOS-кнопки в верхнем меню ==== */
+/* iOS кнопки */
 .sidebar-center a {
     display: inline-block;
     padding: 6px 14px;
     background: linear-gradient(to bottom, #ffffff, #e6e6e6);
-    border-radius: 12px;               /* iOS округление */
-    border: 1px solid #b8b8b8;
-    color: #000;
-    font-size: 14px;
+    border-radius: 12px;
+    border: 1.5px solid #1f5f8b;
+    color: black;
+    font-size: 13px;
     font-weight: 500;
     text-decoration: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.30); /* iOS тенёк */
-    transition: 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.30);
+    transition: 0.2s;
 }
 
-/* Нажатие как на iPhone */
+.sidebar-center a:hover {
+    background: #e5e5e5;
+}
+
 .sidebar-center a:active {
     transform: scale(0.96);
-    background: linear-gradient(to bottom, #dcdcdc, #c8c8c8);
 }
 
-/* ==== Нижний блок ==== */
+/* Нижний блок */
 .filters-container {
     margin-top: 14px;
     display: flex;
-    gap: 50px;      /* расстояние между колонками */
+    gap: 50px;
 }
 
 /* Колонки */
@@ -381,57 +350,25 @@ body {
     color: black;
 }
 
-/* Каждая строка */
+/* строка: текст + поле */
 .filter-row {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 10px; /* расстояние между строками */
-    height: 20px;        /* <<< СТАВИШЬ ОДИНАКОВУЮ ВЫСОТУ ДЛЯ ВСЕХ */
+    margin-bottom: 10px;
+    height: 20px;
 }
 
-/* Поля */
 .filters-column input,
 .filters-column select {
-    width: 120px;        /* <<< одинаковая ширина */
-    height: 18px;        /* <<< одинаковая высота */
+    width: 120px;
+    height: 18px;
     border: 1px solid #A2A2A2;
     border-radius: 5px;
     padding-left: 4px;
-    box-sizing: border-box;
-    padding: 0;
 }
-
-/* подписи (Тип поездки, Дата С, По...) */
-.filters-column label {
-    margin-bottom: 4px;    /* <<< регулируешь расстояние label → поле */
-    display: block;
-}
-
-/* поля */
 
 .filter-row label {
     width: 90px;
     font-size: 12px;
-    font-weight: 100px;
-}
-
-
-/* ==== ОКРУГЛЁННЫЕ КНОПКИ В ВЕРХНЕМ МЕНЮ ==== */
-.sidebar-center a {
-    display: inline-block;
-    padding: 4px 10px;           /* чтобы выглядело как кнопка */
-    background: #ffffff;         /* светлый фон */
-    border: 1.5px solid #1f5f8b; /* как у левого меню */
-    border-radius: 7px;          /* <<< округление */
-    text-decoration: none;
-    color: black;
-    font-size: 13px;
-    font-weight: 500;
-    transition: 0.2s;
-}
-
-/* ХОВЕР — как у левого меню */
-.sidebar-center a:hover {
-    background: #e5e5e5;
 }
