@@ -3,6 +3,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
+    html, body {
+        min-width: 1280px; /* заставляем мобильный браузер показывать ПК-ширину */
+    }
+
 
 
 .filters-column, .filters-column, .sidebar-center {
