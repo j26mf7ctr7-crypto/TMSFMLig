@@ -6,12 +6,6 @@
     <link rel="stylesheet" href="tms.css">
 </head>
 <body> 
-<style>
-    html, body {
-        min-width: 1280px; /* заставляем мобильный браузер показывать ПК-ширину */
-    }
-</style>
-
 
     <script>
 /* ==== ОТКРЫТИЕ ПАНЕЛЕЙ ==== */
@@ -137,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div class="filter-row">
                 <label>Тип поездки</label>
+
                 <select id="tripType">
                     <option value="all">All</option>
                     <option value="loading">Загрузка</option>
@@ -150,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div class="filter-row">
-                <label>Дата до</label>
+                <label>Дата по</label>
                 <input type="date">
             </div>
 
@@ -166,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="filter-row">
                 <label>Сервис</label>
                 <select id="tripType" id="service">
-                    <option value=""></option>
+                    <option value="All">All</option>
                     <option value="CF">CF - Create FTL</option>
                     <option value="FC">FC - Full Cont.</option>
                     <option value="FD">FD - FTL Addld</option>
@@ -211,8 +206,26 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="filters-column">
 
             <div class="filter-row">
-                <label>Дисп.</label>
-                <select id="dispatcher"></select>
+                <label>Пользователь</label>
+                <select id="dispatcher">
+                    <option value="sppecialist 0"></option>
+                    <option value="specialist 1">Специалист 1</option>
+                    <option value="specialist 2">Специалист 2</option>
+                    <option value="specialist 3">Специалист 3</option>
+                    <option value="specialist 4">Специалист 4</option>
+                    <option value="specialist 5">Специалист 5</option>
+                    <option value="specialist 6">Специалист 6</option>
+                    <option value="specialist 7">Специалист 7</option>
+                    <option value="specialist 8">Специалист 8</option>
+                    <option value="specialist 9">Специалист 9</option>
+                    <option value="specialist 10">Специалист 10</option>
+                    <option value="specialist 11">Специалист 11</option>
+                    <option value="specialist 12">Специалист 12</option>
+                    <option value="specialist 13">Специалист 13</option>
+                    <option value="specialist 14">Специалист 14</option>
+                    <option value="specialist 15">Специалист 15</option>
+                    
+                </select>
             </div>
 
             <div class="filter-row">
@@ -240,14 +253,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <div class="sidebar">
 <div class="menu">
-
     <div class="item">
         <input type="checkbox" id="m1">
         <label for="m1" class="title">
             <span class="dot"></span> Диспетчеризация
             <span class="arrow">▾</span>
         </label>
-
         <div class="content">
             <a onclick="openPanel('Заявка в ТК')">Заявка в ТК</a>
             <a onclick="openPanel('DRIVERS')">DRIVERS</a>
@@ -263,14 +274,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <a onclick="openPanel('Проверка планирования')">Проверка планирования</a>
         </div>
     </div>
-
     <div class="item">
         <input type="checkbox" id="m2">
         <label for="m2" class="title">
             <span class="dot"></span> Отчётность Диспетчеризация
             <span class="arrow">▾</span>
         </label>
-
         <div class="content">
             <a onclick="openPanel('Отчет заявок')">Отчет заявок</a>
             <a onclick="openPanel('Отчет по опаздывающим')">Отчет по опаздывающим</a>
@@ -283,14 +292,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <a onclick="openPanel('Спланированные/Не Спланированные плечи')">Спланированные/Не Спланированные плечи</a>
         </div>
     </div>
-
     <div class="item">
         <input type="checkbox" id="m3">
         <label for="m3" class="title">
             <span class="dot"></span> Кросс-док
             <span class="arrow">▾</span>
         </label>
-
         <div class="content">
             <a onclick="openPanel('Выход для X-DOC')">Выход для X-DOC</a>
             <a onclick="openPanel('Выход из X-DOC Inditex')">Выход из X-DOC Inditex</a>
@@ -308,6 +315,16 @@ document.addEventListener("DOMContentLoaded", () => {
             <a onclick="openPanel('PLAN BOARD')">PLAN BOARD</a>
             <a onclick="openPanel('Диспетчерский отчёт по заявкам')">Диспетчерский отчёт по заявкам</a>
             <a onclick="openPanel('Выход из X-DOC Регионы')">Выход из X-DOC Регионы</a>
+            <a onclick="openPanel('Отправить изменения по поездке в A2')">Отправить изменения по поездке в A2</a>
+            <a onclick="openPanel('Инбаунд v2.0')">Инбаунд v2.0</a>
+            <a onclick="openPanel('Вход на X-DOC регионы')">Вход на X-DOC регионы</a>
+            <a onclick="openPanel('Количество документов по заявке v0.2')">Количество документов по заявке v0.2</a>
+            <a onclick="openPanel('Статус печати документов')">Статус печати документов</a>
+            <a onclick="openPanel('Вход и выход для A2')">Вход и выход для A2</a>
+            <a onclick="openPanel('ВходВыход для А2 Парсель Процесс')">ВходВыход для А2 Парсель Процесс</a>
+            <a onclick="openPanel('Контроль статусов ГЕ')">Контроль статусов ГЕ</a>
+            <a onclick="openPanel('Лист подбора Толбино тест')">Лист подбора Толбино тест</a>
+            <a onclick="openPanel('Требуемые документы')">Требуемые документы</a>
         </div>
     </div>
 
