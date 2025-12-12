@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>   
+    <title>Главная</title>
+    <link rel="stylesheet" href="tms.css">
+</head>
+<body> 
+
+
+    <script>
+/* ==== ОТКРЫТИЕ ПАНЕЛЕЙ ==== */
+function openPanel(title) {
+    
+    const container = document.getElementById("floating-panels");
+
+    const panel = document.createElement("div");
+    panel.className = "float-panel";
+
+    panel.innerHTML = `
+        <div class="panel-header">
+            <span>${title}</span>
+            <button class="close-btn" onclick="closePanel(this)">×</button>
+        </div>
+    `;
+
+    container.appendChild(panel);
+    updatePanelsLayout();
+}
+
+/* ==== ЗАКРЫТИЕ ПАНЕЛИ ==== */
+function closePanel(btn) {
+    const panel = btn.closest(".float-panel");
+    if (panel) {
+        panel.remove();
+        updatePanelsLayout();
+    }
+}
+
+/* ==== ПЕРЕСЧЁТ ПОЛОЖЕНИЯ ПАНЕЛЕЙ ==== */
+function updatePanelsLayout() {
+    const container = document.getElementById("floating-panels");
+    if (!container) return;
+
+    const panels = [...container.children];
+    const n = panels.length;
+    if (n === 0) return;
+
+    const baseWidth = 130;
+    const baseHeight = 30;
+    const gap = 4;
+    const minScale = 0.35;
+
+    const availableWidth = container.clientWidth;
+    const totalGaps = (n - 1) * gap;
+
+    let scale = Math.min(1, (availableWidth - totalGaps) / (n * baseWidth));
+    scale = Math.max(scale, minScale);
+
+    let x = 0;
+    for (let p of panels) {
+        p.style.width = baseWidth + "px";
+        p.style.height = baseHeight + "px";
+        p.style.left = x + "px";
+        p.style.top = "0px";
+        p.style.transform = `scale(${scale})`;
+        x += baseWidth * scale + gap;
+    }
+}
+</script>
+
+
+<!-- ==== ТЁМНАЯ ТЕМА ==== -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const switcher = document.getElementById("theme-switch");
+    const body = document.body;
+
+    if (!switcher) {
+        console.warn("theme-switch не найден!");
+        return;
+    }
+
+    // при загрузке страницы
+    if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-theme");
+        switcher.classList.add("active");
+    }
+
+    // нажали на переключатель
+    switcher.addEventListener("click", () => {
+        const isDark = body.classList.toggle("dark-theme");
+        switcher.classList.toggle("active", isDark);
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+
+});
+</script>
+
+
+<div id="theme-switch" class="switch">
+    <div class="switch-circle"></div>
+</div>
+
+
+<!-- Верхний блок -->
+<div class="sidebar-top">
+    <div class="menu-top">
+        <img src="./fm-logo-top.png" alt="" class="img-top">
+    </div>
+</div>
+
+
+<!-- Блок меню при открытии -->
+<div class="sidebar-center-menu">
+
+    <div class="sidebar-center">
+        <a href="#">Выгрузить</a>
+        <a href="#">Экспорт</a>
+        <a>|</a>
+        <a href="#">Просмотр</a>
+        <a href="#">Отследить</a>
+        <a href="#">Печать док-ов</a>
+        <a href="#">Track&Trace</a>
+        <a href="#">Функции</a>
+        <a href="#">Фильтры</a>
+    </div>
+
+    <div class="filters-container">
+
+        <div class="filters-column">
+
+            <div class="filter-row">
+                <label>Тип поездки</label>
+                <select id="tripType">
+                    <option value="all">All</option>
+                    <option value="loading">Загрузка</option>
+                    <option value="unloading">Выгрузка</option>
+                </select>
+            </div>
+
+            <div class="filter-row">
+                <label>Дата с</label>
+                <input type="date">
+            </div>
+
+            <div class="filter-row">
+                <label>Дата до</label>
+                <input type="date">
+            </div>
+
+        </div>
+
+        <div class="filters-column">
+
+            <div class="filter-row">
+                <label>Номер поездки</label>
+                <input type="text">
+            </div>
+
+            <div class="filter-row">
+                <label>Сервис</label>
+                <select id="tripType">
+                    <option value=""></option>
+                    <option value="CF">CF - Create FTL</option>
+                    <option value="FC">FC - Full Cont.</option>
+                    <option value="FD">FD - FTL Addld</option>
+                    <option value="FT">FT - FTL</option>
+                    <option value="LD">LD - LTL Addld</option>
+                    <option value="LE">LE - LMS Expres</option>
+                    <option value="LM">LM - LMS Delive</option>
+                    <option value="LS">LS - LMS Stand</option>
+                    <option value="LT">LT - LTL</option>
+                    <option value="LZ">LZ - LTL ЖД</option>
+                    <option value="MD">MD - Мультимод</option>
+                    <option value="MG">MG - LTL Mck</option>
+                    <option value="PF">PF - PoolingFTL</option>
+                    <option value="PL">PL - PoolingLTL</option>
+                    <option value="RE">RE - Return</option>
+                    <option value="RF">RF - возврат FM</option>
+                    <option value="RL">RL - LMS return</option>
+                    <option value="RP">RP - Return pin</option>
+                    <option value="RT">RT - Round trip</option>
+                    <option value="SG">SG - Shanting</option>
+                    <option value="SH">SH - Shuttle</option>
+                    <option value="SP">SP - Spec Proj</option>
+                    <option value="TR">TR - Trailer</option>
+                    <option value="ZF">ZF - FTL ж/д</option>
+                    <option value="ZL">ZL - Реф секция</option>
+                    <option value="ZP">ZP - Post-lagg.</option>
+                </select>
+            </div>
+
+            <div class="filter-row">
+                <label>Activated Trip</label>
+                                <select id="tripType">
+                    <option value=""></option>
+                    <option value="yes">Да</option>
+                    <option value="No">Нет</option>
+                    <option value="transport company">От ТК</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="filters-column">
+
+            <div class="filter-row">
+                <label>Дисп.</label>
+                <select></select>
+            </div>
+
+            <div class="filter-row">
+                <label>Планер</label>
+                <select></select>
+            </div>
+
+            <div class="filter-row">
+                <label>MSK/REG</label>
+                <select id="tripType">
+                    <option value="all">All</option>
+                    <option value="MSK">MSK</option>
+                    <option value="REG">REG</option>
+                    <option value="REGNIGHT">REGNIGHT</option>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="sidebar">
+<div class="menu">
+
+    <div class="item">
+        <input type="checkbox" id="m1">
+        <label for="m1" class="title">
+            <span class="dot"></span> Диспетчеризация
+            <span class="arrow">▾</span>
+        </label>
+
+        <div class="content">
+            <a onclick="openPanel('Заявка в ТК')">Заявка в ТК</a>
+            <a onclick="openPanel('DRIVERS')">DRIVERS</a>
+            <a onclick="openPanel('Информация о поездке')">Информация о поездке</a>
+            <a onclick="openPanel('Создать ВЗ')">Создать ВЗ</a>
+            <a onclick="openPanel('Поездки для диспетчеризации')">Поездки для диспетчеризации</a>
+            <a onclick="openPanel('Отчет для информирования')">Отчет для информирования</a>
+            <a onclick="openPanel('Управление отношениями')">Управление отношениями</a>
+            <a onclick="openPanel('Управление заказами')">Управление заказами</a>
+            <a onclick="openPanel('PLAN BOARD')">PLAN BOARD</a>
+            <a onclick="openPanel('Информация о заявке')">Информация о заявке</a>
+            <a onclick="openPanel('Ручное закрепление')">Ручное закрепление</a>
+            <a onclick="openPanel('Проверка планирования')">Проверка планирования</a>
+        </div>
+    </div>
+
+    <div class="item">
+        <input type="checkbox" id="m2">
+        <label for="m2" class="title">
+            <span class="dot"></span> Отчётность Диспетчеризация
+            <span class="arrow">▾</span>
+        </label>
+
+        <div class="content">
+            <a onclick="openPanel('Отчет заявок')">Отчет заявок</a>
+            <a onclick="openPanel('Отчет по опаздывающим')">Отчет по опаздывающим</a>
+            <a onclick="openPanel('Обзор поездок')">Обзор поездок</a>
+            <a onclick="openPanel('Отчет для информирования')">Отчет для информирования</a>
+            <a onclick="openPanel('Ecotransit')">Ecotransit</a>
+            <a onclick="openPanel('Диспетчерский отчет по поездкам')">Диспетчерский отчет по поездкам</a>
+            <a onclick="openPanel('Диспетчерский отчет по заявкам')">Диспетчерский отчет по заявкам</a>
+            <a onclick="openPanel('Отправка данных клиенту')">Отправка данных клиенту</a>
+            <a onclick="openPanel('Спланированные/Не Спланированные плечи')">Спланированные/Не Спланированные плечи</a>
+        </div>
+    </div>
+
+    <div class="item">
+        <input type="checkbox" id="m3">
+        <label for="m3" class="title">
+            <span class="dot"></span> Кросс-док
+            <span class="arrow">▾</span>
+        </label>
+
+        <div class="content">
+            <a onclick="openPanel('Выход для X-DOC')">Выход для X-DOC</a>
+            <a onclick="openPanel('Выход из X-DOC Inditex')">Выход из X-DOC Inditex</a>
+            <a onclick="openPanel('Вход на X-DOC Inditex')">Вход на X-DOC Inditex</a>
+            <a onclick="openPanel('Session killer')">Session killer</a>
+            <a onclick="openPanel('Управление отношениями')">Управление отношениями</a>
+            <a onclick="openPanel('Лист подбора')">Лист подбора</a>
+            <a onclick="openPanel('Лист подбора Толбино')">Лист подбора Толбино</a>
+            <a onclick="openPanel('Вход для А2')">Вход для А2</a>
+            <a onclick="openPanel('Управление заказами')">Управление заказами</a>
+            <a onclick="openPanel('Выход для А2')">Выход для А2</a>
+            <a onclick="openPanel('Переотправка М49')">Переотправка М49</a>
+            <a onclick="openPanel('Отчет по опаздывающим')">Отчет по опаздывающим</a>
+            <a onclick="openPanel('Документооборот ADMIN-TOOL')">Документооборот ADMIN-TOOL</a>
+            <a onclick="openPanel('PLAN BOARD')">PLAN BOARD</a>
+            <a onclick="openPanel('Диспетчерский отчёт по заявкам')">Диспетчерский отчёт по заявкам</a>
+            <a onclick="openPanel('Выход из X-DOC Регионы')">Выход из X-DOC Регионы</a>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- ПРАВЫЕ ВСПЛЫВАЮЩИЕ ПАНЕЛИ -->
+<div id="floating-panels"></div>
+</body>
+
+</html>
