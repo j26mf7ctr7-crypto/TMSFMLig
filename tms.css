@@ -431,39 +431,3 @@ body {
 .sidebar-center a:hover {
     background: #e5e5e5;
 }
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 768px) {
-
-    .sidebar-center-menu {
-        left: 0 !important;         /* центрируем */
-        width: 100% !important;     /* фиксируем ширину */
-        padding: 8px;
-        height: auto;               /* пусть растягивается */
-    }
-
-    .filters-container {
-        flex-direction: column;     /* поля под друг другом */
-        gap: 12px;
-    }
-
-    .filter-row {
-        flex-direction: column;     /* текст над полем */
-        align-items: flex-start;
-        height: auto;
-    }
-
-    .filters-column input,
-    .filters-column select {
-        width: 100%;                /* адаптация */
-    }
-}
