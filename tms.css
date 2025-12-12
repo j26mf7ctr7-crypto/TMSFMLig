@@ -68,10 +68,10 @@ body {
 .dark-theme .float-panel {
     background: #0d4f77;
 }
-.dark-theme .sidebar-center a {
-    color: white;
 
-}
+/* .dark-theme .sidebar-center a {
+    color: white;
+} */
 
 .dark-theme .filters-column {
     color: white;
@@ -306,38 +306,60 @@ body {
 }
 
 
-/* ==== ВЕРХНЕЕ МЕНЮ — НЕ ТРОГАЕМ ==== */
+/* ==== БЛОК ГДЕ ИНФОРМАЦИЯ ПО ПОЕЗДКАМ НАХОДИТСЯ  ==== */
 .sidebar-center-menu {
     background: #eceef1;
     border-radius: 7px;
     box-shadow: 4px 0 35px rgba(0,0,0,0.15);
     position: fixed;
-    top: 11.8%;
+    top: 11%;
     left: 16.5%;
     width: 100%;
-    height: 110px;
+    height: 120px;
     padding: 12px;
     display: block;
     z-index: 2000;
     user-select: none;
 }
 
-/* ==== Верхнее меню ==== */
-.sidebar-center {
-    font-size: 14px;
-    background: red;
-    border-radius: 7px;
-        cursor: pointer;
-
-    display: flex;
-    gap: 10px;
-    border-bottom: rgb(64, 63, 134) solid 1.5px;
+.sidebar-center a:hover {
+    background: #e5e5e5;
 }
 
+/* Работа с текстом Выгрущить Экспорт и т.п */
+
+
+.sidebar-center {
+    font-size: 14px;
+    /* border: 0.5px solid #1f5f8b;  */ /* Добавляет полосы  */
+    border-radius: 7px;          
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+
+}
+
+/* Работа с текстом Выгрущить Экспорт и т.п */
+
+/* ==== iOS-кнопки в верхнем меню ==== */
 .sidebar-center a {
-    text-decoration: none;
-    color: black;
+    display: inline-block;
+    padding: 6px 14px;
+    background: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    border-radius: 12px;               /* iOS округление */
+    border: 1px solid #b8b8b8;
+    color: #000;
+    font-size: 14px;
     font-weight: 500;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.30); /* iOS тенёк */
+    transition: 0.2s ease;
+}
+
+/* Нажатие как на iPhone */
+.sidebar-center a:active {
+    transform: scale(0.96);
+    background: linear-gradient(to bottom, #dcdcdc, #c8c8c8);
 }
 
 /* ==== Нижний блок ==== */
@@ -388,4 +410,60 @@ body {
     width: 90px;
     font-size: 12px;
     font-weight: 100px;
+}
+
+
+/* ==== ОКРУГЛЁННЫЕ КНОПКИ В ВЕРХНЕМ МЕНЮ ==== */
+.sidebar-center a {
+    display: inline-block;
+    padding: 4px 10px;           /* чтобы выглядело как кнопка */
+    background: #ffffff;         /* светлый фон */
+    border: 1.5px solid #1f5f8b; /* как у левого меню */
+    border-radius: 7px;          /* <<< округление */
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+/* ХОВЕР — как у левого меню */
+.sidebar-center a:hover {
+    background: #e5e5e5;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    .sidebar-center-menu {
+        left: 0 !important;         /* центрируем */
+        width: 100% !important;     /* фиксируем ширину */
+        padding: 8px;
+        height: auto;               /* пусть растягивается */
+    }
+
+    .filters-container {
+        flex-direction: column;     /* поля под друг другом */
+        gap: 12px;
+    }
+
+    .filter-row {
+        flex-direction: column;     /* текст над полем */
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .filters-column input,
+    .filters-column select {
+        width: 100%;                /* адаптация */
+    }
 }
